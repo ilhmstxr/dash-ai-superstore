@@ -347,16 +347,16 @@ function hideTooltip() {
   tooltip.style('opacity', '0');
 }
 
-// ── Neo-Brutalism SVG helper ──
+// ── Claymorphism SVG helper ──
 const NEO = {
-  bg:        '#121212',
-  barNormal: '#ffffff',
-  barAnomaly:'#FF0055',
-  barHover:  '#FFD600',
-  textColor: '#a0a0a0',
-  stroke:    '#ffffff',
-  gridLine:  '#2a2a2a',
-  axisFont:  '10px Space Mono, monospace',
+  bg:        'transparent',
+  barNormal: 'var(--clay-blue-dark)',
+  barAnomaly:'var(--clay-red-dark)',
+  barHover:  'var(--clay-yellow-dark)',
+  textColor: 'var(--text-secondary)',
+  stroke:    'rgba(0, 0, 0, 0.1)',
+  gridLine:  'rgba(0, 0, 0, 0.05)',
+  axisFont:  '11px "Nunito", sans-serif',
 };
 
 /**
@@ -541,7 +541,7 @@ function drawLineChart(svgId, data, opts = {}) {
   g.append('path')
     .datum(data)
     .attr('fill', 'none')
-    .attr('stroke', '#22D3EE')
+    .attr('stroke', 'var(--clay-blue-dark)')
     .attr('stroke-width', 3)
     .attr('d', line);
 
@@ -554,12 +554,12 @@ function drawLineChart(svgId, data, opts = {}) {
       .attr('cx', d => xScale(d.label))
       .attr('cy', d => yScale(d.value))
       .attr('r', 4)
-      .attr('fill', NEO.bg)
-      .attr('stroke', '#22D3EE')
+      .attr('fill', 'var(--bg-light)')
+      .attr('stroke', 'var(--clay-blue-dark)')
       .attr('stroke-width', 2)
       .style('cursor', 'pointer')
       .on('mousemove', function(event, d) {
-        d3.select(this).attr('fill', '#22D3EE').attr('r', 6);
+        d3.select(this).attr('fill', 'var(--clay-blue-dark)').attr('r', 6);
         showTooltip(
           `<span style="color:var(--neon-yellow)">${d.label}</span><br/>
            <span class="mono">${fmt(d.value)}</span>`,
@@ -567,7 +567,7 @@ function drawLineChart(svgId, data, opts = {}) {
         );
       })
       .on('mouseleave', function(event, d) {
-        d3.select(this).attr('fill', NEO.bg).attr('r', 4);
+        d3.select(this).attr('fill', 'var(--bg-light)').attr('r', 4);
         hideTooltip();
       });
 
@@ -635,7 +635,7 @@ function drawDonutChart(svgId, data, opts = {}) {
 
   const colorScale = d3.scaleOrdinal()
     .domain(data.map(d => d.label))
-    .range(['#22D3EE', '#FFD600', '#BF5AF2', '#00FF94', '#FF0055']);
+    .range(['var(--clay-blue-dark)', 'var(--clay-green-dark)', 'var(--clay-yellow-dark)', 'var(--clay-red-dark)', '#8b5cf6']);
 
   const pie = d3.pie()
     .value(d => d.value)
