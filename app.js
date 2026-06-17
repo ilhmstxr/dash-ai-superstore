@@ -797,7 +797,7 @@ async function askCustomQuestion() {
     output.textContent = `⚠ Error: ${err.message}`;
   } finally {
     btn.disabled = false;
-    btn.textContent = '<i class="fa-solid fa-paper-plane"></i> Tanya';
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Tanya';
   }
 }
 /**
@@ -1006,8 +1006,18 @@ async function main() {
   setMarkdown('conflict-text',   scr.conflict   || '—');
   setMarkdown('resolution-text', scr.resolution || '—');
 
+  let alertMarkdown = aiData.alert || '';
+  if (alertMarkdown.includes('•')) {
+    alertMarkdown = alertMarkdown
+      .split('•')
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+      .map(item => `- ${item}`)
+      .join('\n');
+  }
+
   setMarkdown('insight-output',   aiData.insight);
-  setMarkdown('ai-alert-summary', aiData.alert);
+  setMarkdown('ai-alert-summary', alertMarkdown);
 
   if (statusEl) {
     statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--clay-green-dark);"></i> Analisis AI Selesai (${rawData.length} baris data)`;

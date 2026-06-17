@@ -124,7 +124,7 @@ ${profitLines}
 ${momLines}
 
 Tugas kamu: Rangkum temuan di atas menjadi TEPAT 3 poin bullet dalam Bahasa Indonesia.
-Setiap poin harus dimulai dengan "•" dan berisi 1 kalimat padat yang menjelaskan risiko bisnis nyata.
+Setiap poin harus dimulai dengan "- " (tanda minus diikuti spasi) dan berisi 1 kalimat padat yang menjelaskan risiko bisnis nyata.
 Jangan gunakan nomor urut. Langsung ke poin tanpa pengantar.
 `.trim();
 

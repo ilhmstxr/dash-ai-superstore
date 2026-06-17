@@ -536,6 +536,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   overflow: hidden;
 }
+.chart-svg-wrap svg {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  display: block;
+}
 .chart-title {
   font-weight: 800;
   font-size: 16px;
@@ -620,6 +626,57 @@ svg .tick line {
 }
 .alert-item:hover {
   transform: translateX(4px);
+}
+.alert-item.warning {
+  border-left-color: var(--clay-yellow-dark);
+}
+.alert-item.warning .alert-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--clay-yellow-dark);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.alert-item.severe {
+  border-left-color: var(--clay-red-dark);
+}
+.alert-item.severe .alert-dot {
+  display: none;
+}
+
+/* ── AI Alert Summary List Styles ── */
+#ai-alert-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+#ai-alert-summary li {
+  position: relative;
+  padding: 16px 20px;
+  padding-left: 54px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-white-outer), var(--shadow-white-inner);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+#ai-alert-summary li:hover {
+  transform: translateY(-2px);
+  box-shadow: 10px 10px 20px rgba(163, 177, 198, 0.3), -10px -10px 20px rgba(255, 255, 255, 0.95), var(--shadow-white-inner);
+}
+#ai-alert-summary li::before {
+  content: "⚠️";
+  position: absolute;
+  left: 18px;
+  top: 15px;
+  font-size: 1.3rem;
 }
 
 /* ── Insight Output Cards ────────────────────────────────────────── */
