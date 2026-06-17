@@ -36,29 +36,45 @@
       <div class="header-right">
         <nav class="tab-bar" role="tablist" aria-label="Dashboard Views">
           <button
-            id="tab-ai"
+            id="tab-overview"
             class="tab-btn active"
             role="tab"
             aria-selected="true"
-            aria-controls="content-ai"
-            onclick="switchTab('ai')"
-          ><i class="fa-solid fa-robot"></i> AI Dashboard</button>
+            aria-controls="page-overview"
+            onclick="switchPage('overview')"
+          ><i class="fa-solid fa-chart-pie"></i> Overview</button>
+          <button
+            id="tab-conflict"
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            aria-controls="page-conflict"
+            onclick="switchPage('conflict')"
+          ><i class="fa-solid fa-triangle-exclamation"></i> Conflict</button>
+          <button
+            id="tab-resolution"
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            aria-controls="page-resolution"
+            onclick="switchPage('resolution')"
+          ><i class="fa-solid fa-lightbulb"></i> Resolution</button>
           <button
             id="tab-tableau"
             class="tab-btn"
             role="tab"
             aria-selected="false"
-            aria-controls="content-tableau"
-            onclick="switchTab('tableau')"
-          ><i class="fa-solid fa-table-cells"></i> Tableau View</button>
+            aria-controls="page-tableau"
+            onclick="switchPage('tableau')"
+          ><i class="fa-solid fa-table-cells"></i> Tableau</button>
         </nav>
       </div>
     </header>
 
-    <main id="content-ai" class="tab-content active" role="tabpanel" aria-labelledby="tab-ai">
+    <main class="pages-container">
 
-      <!-- ========================================== ZONE 1: SETUP ========================================== -->
-      <section id="zone-setup" class="zone-section" aria-label="Zone 1: Setup">
+      <!-- ========================================== PAGE 1: OVERVIEW ========================================== -->
+      <section id="page-overview" class="page-content active" role="tabpanel" aria-labelledby="tab-overview">
 
         <div class="zone-header">
           <span class="zone-index">01</span>
@@ -106,10 +122,8 @@
 
       </section>
 
-      <hr class="clay-divider" />
-
-      <!-- ========================================== ZONE 2: CONFLICT ========================================== -->
-      <section id="zone-conflict" class="zone-section" aria-label="Zone 2: Conflict">
+      <!-- ========================================== PAGE 2: CONFLICT ========================================== -->
+      <section id="page-conflict" class="page-content" role="tabpanel" aria-labelledby="tab-conflict">
 
         <div class="zone-header">
           <span class="zone-index">02</span>
@@ -228,10 +242,8 @@
 
       </section>
 
-      <hr class="clay-divider" />
-
-      <!-- ========================================== ZONE 3: RESOLUTION ========================================== -->
-      <section id="zone-resolution" class="zone-section" aria-label="Zone 3: Resolution">
+      <!-- ========================================== PAGE 3: RESOLUTION ========================================== -->
+      <section id="page-resolution" class="page-content" role="tabpanel" aria-labelledby="tab-resolution">
 
         <div class="zone-header">
           <span class="zone-index">03</span>
@@ -316,11 +328,9 @@
 
       </section>
 
-    </main>
-
-    <!-- ========================================== TABLEAU VIEW ========================================== -->
-    <div id="content-tableau" class="tab-content" role="tabpanel" aria-labelledby="tab-tableau">
-      <div class="clay-card" style="padding: 24px; overflow-x: auto;">
+      <!-- ========================================== PAGE 4: TABLEAU ========================================== -->
+      <section id="page-tableau" class="page-content" role="tabpanel" aria-labelledby="tab-tableau">
+        <div class="clay-card" style="padding: 24px; overflow-x: auto;">
         <div class='tableauPlaceholder' id='viz1781374573370' style='position: relative; width: 1360px; margin: 0 auto; box-shadow: var(--shadow-outer); border-radius: var(--radius-sm); overflow: hidden;'>
           <noscript>
             <a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;SalesProfitAnalytichDashboard&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
@@ -352,7 +362,9 @@
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
         </script>
       </div>
-    </div>
+      </section>
+
+    </main>
 
     <footer style="
       margin-top: var(--gap-lg);
@@ -386,14 +398,26 @@
   <script src="app.js"></script>
 
   <script>
-    function switchTab(name) {
+    function switchPage(name) {
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.toggle('active', b.id === `tab-${name}`);
         b.setAttribute('aria-selected', b.id === `tab-${name}`);
       });
-      document.querySelectorAll('.tab-content').forEach(c => {
-        c.classList.toggle('active', c.id === `content-${name}`);
+      document.querySelectorAll('.page-content').forEach(p => {
+        p.classList.toggle('active', p.id === `page-${name}`);
       });
+
+      // Redraw charts when switching to conflict page (charts need visible container for width)
+      if (name === 'conflict' && typeof _cachedSummary !== 'undefined' && _cachedSummary) {
+        setTimeout(() => {
+          renderTrendChart(_cachedSummary);
+          renderSubCategoryChart(_cachedSummary, _cachedAnomalies || { profitOutliers: [], momSpikes: [] });
+          renderCityChart(_cachedSummary);
+          renderCategoryChart(_cachedSummary);
+          renderSegmentChart(_cachedSummary);
+          renderRegionChart(_cachedSummary);
+        }, 50);
+      }
     }
 
     function switchAlertTab(name) {
@@ -415,14 +439,15 @@
         c.classList.toggle('active', c.id === `chart-${name}-wrap`);
       });
 
-      // Redraw the chart to calculate width correctly since it is now visible
       if (typeof _cachedSummary !== 'undefined' && _cachedSummary) {
-        if (name === 'trend') renderTrendChart(_cachedSummary);
-        else if (name === 'subcategory') renderSubCategoryChart(_cachedSummary, _cachedAnomalies || { profitOutliers: [], momSpikes: [] });
-        else if (name === 'city') renderCityChart(_cachedSummary);
-        else if (name === 'category') renderCategoryChart(_cachedSummary);
-        else if (name === 'segment') renderSegmentChart(_cachedSummary);
-        else if (name === 'region') renderRegionChart(_cachedSummary);
+        setTimeout(() => {
+          if (name === 'trend') renderTrendChart(_cachedSummary);
+          else if (name === 'subcategory') renderSubCategoryChart(_cachedSummary, _cachedAnomalies || { profitOutliers: [], momSpikes: [] });
+          else if (name === 'city') renderCityChart(_cachedSummary);
+          else if (name === 'category') renderCategoryChart(_cachedSummary);
+          else if (name === 'segment') renderSegmentChart(_cachedSummary);
+          else if (name === 'region') renderRegionChart(_cachedSummary);
+        }, 50);
       }
     }
 

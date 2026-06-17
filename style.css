@@ -161,27 +161,36 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Tab Bar ─────────────────────────────────────────────────────── */
 .tab-bar {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   background: var(--bg-base);
   padding: 8px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-white-pressed);
+  flex-wrap: wrap;
 }
 
 .tab-btn {
   background: transparent;
   color: var(--text-secondary);
   border: none;
-  padding: 12px 24px;
+  padding: 10px 18px;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   cursor: pointer;
   transition: var(--transition);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* ── Pages Container ─────────────────────────────────────────────── */
+.pages-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
 }
 
 .tab-btn:hover {
@@ -201,6 +210,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tab-content.active {
   display: block;
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-content {
+  display: none;
+}
+.page-content.active {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
   animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
