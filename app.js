@@ -960,6 +960,11 @@ async function main() {
   // ══════════════════════════════════════════════════════════
   console.log('[app] Phase 3: Dispatching AI requests (Checking DB Cache)…');
 
+  const statusEl = document.getElementById('data-source-status');
+  if (statusEl) {
+    statusEl.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles fa-spin"></i> <span class="loading-pulse">AI sedang merumuskan insight & rekomendasi...</span>`;
+  }
+
   const fingerprint = makeSummaryFingerprint(summary);
 
   // Buat minimum delay 2 detik agar UI "Sedang Diproses AI" selalu terlihat
@@ -1003,6 +1008,10 @@ async function main() {
 
   setMarkdown('insight-output',   aiData.insight);
   setMarkdown('ai-alert-summary', aiData.alert);
+
+  if (statusEl) {
+    statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--clay-green-dark);"></i> Analisis AI Selesai (${rawData.length} baris data)`;
+  }
 
   console.log('[app] ✓ All phases complete.');
 }

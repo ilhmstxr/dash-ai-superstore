@@ -78,7 +78,7 @@ function normalizeRow(row) {
 async function loadFromSupabase() {
   console.log(`[supabaseLoader] Mengambil data dari tabel "${CONFIG.SUPABASE_TABLE}"…`);
 
-  showLoadingStatus('Menghubungkan ke Supabase', true);
+  showLoadingStatus('AI sedang mengambil data transaksi...', true);
 
   const raw = await supabaseFetchAll(CONFIG.SUPABASE_TABLE);
 
@@ -87,7 +87,7 @@ async function loadFromSupabase() {
   }
 
   console.log(`[supabaseLoader] ${raw.length} baris diterima.`);
-  showLoadingStatus(`${raw.length} baris dimuat dari Supabase`, false);
+  showLoadingStatus(`AI sedang menganalisis ${raw.length} data transaksi...`, true);
 
   return raw.map(normalizeRow);
 }
@@ -97,9 +97,9 @@ function showLoadingStatus(msg, isLoading = true) {
   const el = document.getElementById('data-source-status');
   if (el) {
     if (isLoading) {
-      el.innerHTML = `<i class="fa-solid fa-hourglass-half fa-spin"></i> <span class="loading-pulse">${msg}</span>`;
+      el.innerHTML = `<i class="fa-solid fa-robot fa-spin"></i> <span class="loading-pulse">${msg}</span>`;
     } else {
-      el.innerHTML = `<i class="fa-solid fa-database"></i> ${msg}`;
+      el.innerHTML = `<i class="fa-solid fa-robot"></i> ${msg}`;
     }
   }
 }
