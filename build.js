@@ -2,19 +2,21 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
-const configContent = `const CONFIG = {
+const configContent = `window.CONFIG = {
   OPENROUTER_API_KEY: '${process.env.OPENROUTER_API_KEY || ''}',
-  OPENROUTER_MODEL:   'gemini-3-flash',
+  OPENROUTER_MODEL:   '${process.env.OPENROUTER_MODEL || 'gemini-3-flash'}',
 
   SUPABASE_URL:      '${process.env.SUPABASE_URL || ''}',
   SUPABASE_ANON_KEY: '${process.env.SUPABASE_ANON_KEY || ''}',
-  SUPABASE_TABLE:    'davis',
+  SUPABASE_TABLE:    '${process.env.SUPABASE_TABLE || 'davis'}',
 
-  DATA_SOURCE: 'supabase',
+  DATA_SOURCE: '${process.env.DATA_SOURCE || 'supabase'}',
 
   COLUMN_MAP: {
     order_id:        'SalesOrderID',
     order_date:      'OrderDate',
+    tahun:           'tahun',
+    bulan:           'bulan',
     ship_date:       'ShipDate',
     ship_method:     'ShipMethod',
     customer_id:     'CustomerID',

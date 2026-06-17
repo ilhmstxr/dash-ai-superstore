@@ -800,6 +800,94 @@ async function askCustomQuestion() {
     btn.textContent = '<i class="fa-solid fa-paper-plane"></i> Tanya';
   }
 }
+/**
+ * initConfig — Asynchronously loads configuration parameters.
+ * First tries to fetch and parse the local `.env` file.
+ * If that fails (e.g. in production/Vercel), it attempts to dynamically load `config.js`.
+ */
+async function initConfig() {
+  try {
+    const response = await fetch('.env');
+    if (response.ok) {
+      const text = await response.text();
+      const env = {};
+      text.split(/\r?\n/).forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const index = trimmed.indexOf('=');
+        if (index !== -1) {
+          const key = trimmed.substring(0, index).trim();
+          const value = trimmed.substring(index + 1).trim().replace(/^['"]|['"]$/g, '');
+          env[key] = value;
+        }
+      });
+
+      window.CONFIG = {
+        OPENROUTER_API_KEY: env.OPENROUTER_API_KEY || '',
+        OPENROUTER_MODEL: env.OPENROUTER_MODEL || 'gemini-3-flash',
+        SUPABASE_URL: env.SUPABASE_URL || '',
+        SUPABASE_ANON_KEY: env.SUPABASE_ANON_KEY || '',
+        SUPABASE_TABLE: env.SUPABASE_TABLE || 'davis',
+        DATA_SOURCE: env.DATA_SOURCE || 'supabase',
+        COLUMN_MAP: {
+          order_id:     'SalesOrderID',
+          order_date:   'OrderDate',
+          tahun:        'tahun',
+          bulan:        'bulan',
+          category:     'Category',
+          sub_category: 'SubCategory',
+          region:       'Territory',
+          sales:        'Sales',
+          profit:       'Profit',
+        }
+      };
+      return;
+    }
+  } catch (error) {
+    console.log('[initConfig] .env file not found or inaccessible, trying config.js...', error);
+  }
+
+  // Fallback to loading config.js if window.CONFIG is not yet defined
+  if (!window.CONFIG) {
+    try {
+      await new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'config.js';
+        script.onload = () => resolve();
+        script.onerror = () => {
+          console.warn('[initConfig] Failed to dynamically load config.js');
+          resolve();
+        };
+        document.head.appendChild(script);
+      });
+    } catch (e) {
+      console.error('[initConfig] Error while dynamically loading config.js:', e);
+    }
+  }
+
+  // Ultimate fallback if neither works
+  if (!window.CONFIG) {
+    window.CONFIG = {
+      OPENROUTER_API_KEY: '',
+      OPENROUTER_MODEL: 'gemini-3-flash',
+      SUPABASE_URL: '',
+      SUPABASE_ANON_KEY: '',
+      SUPABASE_TABLE: 'davis',
+      DATA_SOURCE: 'supabase',
+      COLUMN_MAP: {
+        order_id:     'SalesOrderID',
+        order_date:   'OrderDate',
+        tahun:        'tahun',
+        bulan:        'bulan',
+        category:     'Category',
+        sub_category: 'SubCategory',
+        region:       'Territory',
+        sales:        'Sales',
+        profit:       'Profit',
+      }
+    };
+  }
+}
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -807,6 +895,9 @@ async function askCustomQuestion() {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function main() {
+  // ── Load Configuration ────────────────────────────────────────────────────
+  await initConfig();
+
   // ── Show model badge ──────────────────────────────────────────────────────
   const modelShort = CONFIG.OPENROUTER_MODEL.split('/').pop();
   setText('model-badge-text', modelShort);

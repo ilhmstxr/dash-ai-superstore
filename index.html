@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Sales | Data Visualisasi B</title>
-  <meta name="description" content="Dashboard Sales AI-Augmented menggunakan kerangka Data Storytelling SCR (Setup-Conflict-Resolution) dengan analisis anomali otomatis." />
-  
+  <meta name="description"
+    content="Dashboard Sales AI-Augmented menggunakan kerangka Data Storytelling SCR (Setup-Conflict-Resolution) dengan analisis anomali otomatis." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -16,57 +18,36 @@
 
 
 </head>
+
 <body>
 
-  <div class="d3-tooltip" id="d3-tooltip" role="tooltip" aria-hidden="true" style="position: absolute; background: white; padding: 10px; border-radius: 12px; box-shadow: var(--shadow-outer); display: none; font-weight: 700; font-size: 12px;"></div>
+  <div class="d3-tooltip" id="d3-tooltip" role="tooltip" aria-hidden="true"
+    style="position: absolute; background: white; padding: 10px; border-radius: 12px; box-shadow: var(--shadow-outer); display: none; font-weight: 700; font-size: 12px;">
+  </div>
 
   <div class="dashboard-wrapper">
 
     <header class="page-header" role="banner">
       <div class="header-left">
-        <span class="mono" style="font-size: 13px; color: var(--text-muted); font-weight: 800;">Ragil Hidayatulloh - 23082010014</span>
+        <span class="mono" style="font-size: 13px; color: var(--text-muted); font-weight: 800;">Ilham Bintang Herlambang
+          - 23082010166</span>
         <h2 class="dashboard-main-title">Dashboard Sales</h2>
-        <span
-          id="data-source-status"
-          class="mono"
-          style="font-size:14px; color:var(--clay-blue-dark); font-weight:800;"
-        ><i class="fa-solid fa-hourglass-half fa-spin"></i> <span class="loading-pulse">Menghubungkan ke Supabase</span></span>
+        <span id="data-source-status" class="mono"
+          style="font-size:14px; color:var(--clay-blue-dark); font-weight:800;"><i
+            class="fa-solid fa-hourglass-half fa-spin"></i> <span class="loading-pulse">Menghubungkan ke
+            Supabase</span></span>
       </div>
 
       <div class="header-right">
         <nav class="tab-bar" role="tablist" aria-label="Dashboard Views">
-          <button
-            id="tab-overview"
-            class="tab-btn active"
-            role="tab"
-            aria-selected="true"
-            aria-controls="page-overview"
-            onclick="switchPage('overview')"
-          ><i class="fa-solid fa-chart-pie"></i> Overview</button>
-          <button
-            id="tab-conflict"
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            aria-controls="page-conflict"
-            onclick="switchPage('conflict')"
-          ><i class="fa-solid fa-triangle-exclamation"></i> Conflict</button>
-          <button
-            id="tab-resolution"
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            aria-controls="page-resolution"
-            onclick="switchPage('resolution')"
-          ><i class="fa-solid fa-lightbulb"></i> Resolution</button>
-          <button
-            id="tab-tableau"
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            aria-controls="page-tableau"
-            onclick="switchPage('tableau')"
-          ><i class="fa-solid fa-table-cells"></i> Tableau</button>
+          <button id="tab-overview" class="tab-btn active" role="tab" aria-selected="true" aria-controls="page-overview"
+            onclick="switchPage('overview')"><i class="fa-solid fa-chart-pie"></i> Overview</button>
+          <button id="tab-conflict" class="tab-btn" role="tab" aria-selected="false" aria-controls="page-conflict"
+            onclick="switchPage('conflict')"><i class="fa-solid fa-triangle-exclamation"></i> Conflict</button>
+          <button id="tab-resolution" class="tab-btn" role="tab" aria-selected="false" aria-controls="page-resolution"
+            onclick="switchPage('resolution')"><i class="fa-solid fa-lightbulb"></i> Resolution</button>
+          <button id="tab-tableau" class="tab-btn" role="tab" aria-selected="false" aria-controls="page-tableau"
+            onclick="switchPage('tableau')"><i class="fa-solid fa-table-cells"></i> Tableau</button>
         </nav>
       </div>
     </header>
@@ -87,7 +68,8 @@
             <span class="loading-pulse">Memuat judul analisis</span>
           </h1>
           <p class="text-muted mt-sm" style="font-size:15px; font-weight: 700;">
-            <i class="fa-solid fa-microchip"></i> Powered by <span id="model-name-header" style="color: var(--clay-yellow-dark);"></span>
+            <i class="fa-solid fa-microchip"></i> Powered by <span id="model-name-header"
+              style="color: var(--clay-yellow-dark);"></span>
           </p>
         </div>
 
@@ -114,7 +96,8 @@
           <div class="flex-between mb-sm">
             <span class="kicker kicker-green"><i class="fa-solid fa-circle-info"></i> SETUP — Situasi Awal</span>
           </div>
-          <div style="font-weight: 800; font-size: 14px; color: var(--clay-green-dark); margin-bottom: 8px;">Gambaran Umum Bisnis</div>
+          <div style="font-weight: 800; font-size: 14px; color: var(--clay-green-dark); margin-bottom: 8px;">Gambaran
+            Umum Bisnis</div>
           <div id="setup-text" style="font-size: 16px; line-height: 1.8;">
             <span class="loading-pulse">AI sedang menyusun narasi konteks</span>
           </div>
@@ -132,7 +115,8 @@
 
         <div class="clay-card red">
           <div class="flex-between mb-sm">
-            <span class="kicker kicker-red"><i class="fa-solid fa-triangle-exclamation"></i> CONFLICT — Konflik Teridentifikasi</span>
+            <span class="kicker kicker-red"><i class="fa-solid fa-triangle-exclamation"></i> CONFLICT — Konflik
+              Teridentifikasi</span>
           </div>
           <div id="conflict-text" style="font-size: 16px; line-height: 1.8;">
             <span class="loading-pulse">AI sedang mengidentifikasi konflik</span>
@@ -145,29 +129,21 @@
             <div class="clay-card red">
               <div class="flex-between mb-md">
                 <span class="kicker kicker-red"><i class="fa-solid fa-triangle-exclamation"></i> ALERT PANEL</span>
-                <span id="alert-count" class="mono" style="font-size:14px; font-weight:800; color: var(--clay-red-dark);">0 anomali</span>
+                <span id="alert-count" class="mono"
+                  style="font-size:14px; font-weight:800; color: var(--clay-red-dark);">0 anomali</span>
               </div>
 
               <div class="alert-panel-tabs" role="tablist" aria-label="Alert Panel Tabs">
-                <button
-                  id="alert-tab-raw"
-                  class="alert-tab-btn active"
-                  role="tab"
-                  aria-selected="true"
-                  aria-controls="alert-content-raw"
-                  onclick="switchAlertTab('raw')"
-                ><i class="fa-solid fa-table-list"></i> Raw Data</button>
-                <button
-                  id="alert-tab-ai"
-                  class="alert-tab-btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="alert-content-ai"
-                  onclick="switchAlertTab('ai')"
-                ><i class="fa-solid fa-robot"></i> AI Narrative</button>
+                <button id="alert-tab-raw" class="alert-tab-btn active" role="tab" aria-selected="true"
+                  aria-controls="alert-content-raw" onclick="switchAlertTab('raw')"><i
+                    class="fa-solid fa-table-list"></i> Raw Data</button>
+                <button id="alert-tab-ai" class="alert-tab-btn" role="tab" aria-selected="false"
+                  aria-controls="alert-content-ai" onclick="switchAlertTab('ai')"><i class="fa-solid fa-robot"></i> AI
+                  Narrative</button>
               </div>
 
-              <div id="alert-content-raw" class="alert-tab-content active" role="tabpanel" aria-labelledby="alert-tab-raw">
+              <div id="alert-content-raw" class="alert-tab-content active" role="tabpanel"
+                aria-labelledby="alert-tab-raw">
                 <div id="alert-list" class="alert-scroll" aria-live="polite">
                   <div class="alert-item">
                     <span>Memuat data anomali…</span>
@@ -176,7 +152,8 @@
               </div>
 
               <div id="alert-content-ai" class="alert-tab-content" role="tabpanel" aria-labelledby="alert-tab-ai">
-                <div id="ai-alert-summary" style="padding: 16px; background: var(--bg-light); border-radius: var(--radius-md); font-size: 15px; line-height: 1.7;">
+                <div id="ai-alert-summary"
+                  style="padding: 16px; background: var(--bg-light); border-radius: var(--radius-md); font-size: 15px; line-height: 1.7;">
                   <span class="loading-pulse">AI sedang merangkum anomali</span>
                 </div>
               </div>
@@ -187,23 +164,37 @@
           <div class="clay-card light chart-panel-card">
             <!-- Subtab Bar (Claymorphic) -->
             <div class="chart-subtabs-bar" role="tablist" aria-label="Visualisasi Penjualan">
-              <button id="subtab-trend" class="subtab-btn active" role="tab" aria-selected="true" aria-controls="chart-trend-wrap" onclick="switchSubTab('trend')"><i class="fa-solid fa-chart-line"></i> Tren Bulanan</button>
-              <button id="subtab-subcategory" class="subtab-btn" role="tab" aria-selected="false" aria-controls="chart-subcategory-wrap" onclick="switchSubTab('subcategory')"><i class="fa-solid fa-chart-bar"></i> Profit Sub-Kategori</button>
-              <button id="subtab-city" class="subtab-btn" role="tab" aria-selected="false" aria-controls="chart-city-wrap" onclick="switchSubTab('city')"><i class="fa-solid fa-city"></i> Profit Kota</button>
-              <button id="subtab-category" class="subtab-btn" role="tab" aria-selected="false" aria-controls="chart-category-wrap" onclick="switchSubTab('category')"><i class="fa-solid fa-chart-pie"></i> Sales Kategori</button>
-              <button id="subtab-segment" class="subtab-btn" role="tab" aria-selected="false" aria-controls="chart-segment-wrap" onclick="switchSubTab('segment')"><i class="fa-solid fa-users"></i> Sales Segmen</button>
-              <button id="subtab-region" class="subtab-btn" role="tab" aria-selected="false" aria-controls="chart-region-wrap" onclick="switchSubTab('region')"><i class="fa-solid fa-earth-asia"></i> Profit Region</button>
+              <button id="subtab-trend" class="subtab-btn active" role="tab" aria-selected="true"
+                aria-controls="chart-trend-wrap" onclick="switchSubTab('trend')"><i class="fa-solid fa-chart-line"></i>
+                Tren Bulanan</button>
+              <button id="subtab-subcategory" class="subtab-btn" role="tab" aria-selected="false"
+                aria-controls="chart-subcategory-wrap" onclick="switchSubTab('subcategory')"><i
+                  class="fa-solid fa-chart-bar"></i> Profit Sub-Kategori</button>
+              <button id="subtab-city" class="subtab-btn" role="tab" aria-selected="false"
+                aria-controls="chart-city-wrap" onclick="switchSubTab('city')"><i class="fa-solid fa-city"></i> Profit
+                Kota</button>
+              <button id="subtab-category" class="subtab-btn" role="tab" aria-selected="false"
+                aria-controls="chart-category-wrap" onclick="switchSubTab('category')"><i
+                  class="fa-solid fa-chart-pie"></i> Sales Kategori</button>
+              <button id="subtab-segment" class="subtab-btn" role="tab" aria-selected="false"
+                aria-controls="chart-segment-wrap" onclick="switchSubTab('segment')"><i class="fa-solid fa-users"></i>
+                Sales Segmen</button>
+              <button id="subtab-region" class="subtab-btn" role="tab" aria-selected="false"
+                aria-controls="chart-region-wrap" onclick="switchSubTab('region')"><i
+                  class="fa-solid fa-earth-asia"></i> Profit Region</button>
             </div>
 
             <!-- Tab Contents -->
-            <div id="chart-trend-wrap" class="chart-subtab-content active" role="tabpanel" aria-labelledby="subtab-trend">
+            <div id="chart-trend-wrap" class="chart-subtab-content active" role="tabpanel"
+              aria-labelledby="subtab-trend">
               <div class="chart-title"><i class="fa-solid fa-chart-line"></i> Tren Penjualan Bulanan</div>
               <div class="chart-svg-wrap">
                 <svg id="chart-trend" width="100%" aria-label="Line chart tren penjualan bulanan"></svg>
               </div>
             </div>
 
-            <div id="chart-subcategory-wrap" class="chart-subtab-content" role="tabpanel" aria-labelledby="subtab-subcategory">
+            <div id="chart-subcategory-wrap" class="chart-subtab-content" role="tabpanel"
+              aria-labelledby="subtab-subcategory">
               <div class="chart-title"><i class="fa-solid fa-chart-bar"></i> Profit per Sub-Kategori</div>
               <div class="chart-svg-wrap">
                 <svg id="chart-subcategory" width="100%" aria-label="Bar chart profit per sub-kategori"></svg>
@@ -217,7 +208,8 @@
               </div>
             </div>
 
-            <div id="chart-category-wrap" class="chart-subtab-content" role="tabpanel" aria-labelledby="subtab-category">
+            <div id="chart-category-wrap" class="chart-subtab-content" role="tabpanel"
+              aria-labelledby="subtab-category">
               <div class="chart-title"><i class="fa-solid fa-chart-pie"></i> Sales per Kategori</div>
               <div class="chart-svg-wrap" style="max-width: 500px; margin: 0 auto;">
                 <svg id="chart-category" width="100%" aria-label="Donut chart sales per kategori"></svg>
@@ -252,20 +244,22 @@
 
         <div class="clay-card blue">
           <div>
-            <span class="kicker kicker-blue"><i class="fa-solid fa-book-open"></i> RESOLUTION — Rekomendasi Tindakan</span>
+            <span class="kicker kicker-blue"><i class="fa-solid fa-book-open"></i> RESOLUTION — Rekomendasi
+              Tindakan</span>
           </div>
           <div id="resolution-text" style="font-size: 16px; line-height: 1.8;">
             <span class="loading-pulse">AI sedang menyusun rekomendasi</span>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--gap-lg); align-items: start;">
-          
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--gap-lg); align-items: start;">
+
           <!-- Area Insight (Sekarang CSS akan memecah <li> menjadi card individual) -->
           <div class="clay-card green">
             <span class="kicker kicker-green"><i class="fa-solid fa-lightbulb"></i> AI INSIGHT ENGINE</span>
             <h3 style="margin-bottom: var(--gap-lg); color: var(--clay-green-dark);">3 Insight Utama</h3>
-            
+
             <div id="insight-output">
               <span class="loading-pulse">AI sedang menghasilkan insight</span>
             </div>
@@ -274,7 +268,8 @@
           <!-- Area Data Summary -->
           <div class="clay-card yellow">
             <span class="kicker kicker-yellow"><i class="fa-solid fa-table"></i> DATA SUMMARY</span>
-            <h3 style="margin-bottom: var(--gap-md); color: var(--clay-yellow-dark);">Ringkasan Performa per Kategori</h3>
+            <h3 style="margin-bottom: var(--gap-md); color: var(--clay-yellow-dark);">Ringkasan Performa per Kategori
+            </h3>
             <div class="table-container">
               <table id="category-summary-table">
                 <thead>
@@ -300,30 +295,30 @@
           <h3 style="margin-bottom: var(--gap-md); color: var(--clay-blue-dark);">Deep Dive Analisis</h3>
 
           <div class="question-row" style="display: flex; gap: 16px; margin-bottom: var(--gap-md);">
-            <input
-              id="custom-question-input"
-              class="clay-input"
-              type="text"
-              placeholder="Contoh: Apa penyebab rugi di sub-kategori Caps?"
-              aria-label="Pertanyaan kustom ke AI"
-              onkeydown="handleQuestionEnter(event)"
-            />
-            <button
-              id="ask-btn"
-              class="clay-btn"
-              onclick="askCustomQuestion()"
-              aria-label="Kirim pertanyaan ke AI"
-            ><i class="fa-solid fa-paper-plane"></i> Tanya</button>
+            <input id="custom-question-input" class="clay-input" type="text"
+              placeholder="Contoh: Apa penyebab rugi di sub-kategori Caps?" aria-label="Pertanyaan kustom ke AI"
+              onkeydown="handleQuestionEnter(event)" />
+            <button id="ask-btn" class="clay-btn" onclick="askCustomQuestion()" aria-label="Kirim pertanyaan ke AI"><i
+                class="fa-solid fa-paper-plane"></i> Tanya</button>
           </div>
 
-          <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; font-weight: 800;">Pertanyaan Cepat:</div>
+          <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px; font-weight: 800;">Pertanyaan
+            Cepat:</div>
           <div class="quick-questions" style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="quick-btn" onclick="document.getElementById('custom-question-input').value='Apa penyebab utama kerugian di region tertentu?'; askCustomQuestion();">Penyebab Kerugian</button>
-            <button class="quick-btn" onclick="document.getElementById('custom-question-input').value='Produk apa yang harus segera dihentikan penjualannya?'; askCustomQuestion();">Evaluasi Produk</button>
-            <button class="quick-btn" onclick="document.getElementById('custom-question-input').value='Bagaimana strategi terbaik untuk meningkatkan margin profit?'; askCustomQuestion();">Strategi Margin</button>
+            <button class="quick-btn"
+              onclick="document.getElementById('custom-question-input').value='Apa penyebab utama kerugian di region tertentu?'; askCustomQuestion();">Penyebab
+              Kerugian</button>
+            <button class="quick-btn"
+              onclick="document.getElementById('custom-question-input').value='Produk apa yang harus segera dihentikan penjualannya?'; askCustomQuestion();">Evaluasi
+              Produk</button>
+            <button class="quick-btn"
+              onclick="document.getElementById('custom-question-input').value='Bagaimana strategi terbaik untuk meningkatkan margin profit?'; askCustomQuestion();">Strategi
+              Margin</button>
           </div>
 
-          <div id="custom-answer" style="display:none; background: var(--bg-light); padding: 24px; border-radius: var(--radius-md); box-shadow: var(--shadow-outer); margin-top: 24px; font-size: 15px; line-height: 1.7;"></div>
+          <div id="custom-answer"
+            style="display:none; background: var(--bg-light); padding: 24px; border-radius: var(--radius-md); box-shadow: var(--shadow-outer); margin-top: 24px; font-size: 15px; line-height: 1.7;">
+          </div>
         </div>
 
       </section>
@@ -331,37 +326,41 @@
       <!-- ========================================== PAGE 4: TABLEAU ========================================== -->
       <section id="page-tableau" class="page-content" role="tabpanel" aria-labelledby="tab-tableau">
         <div class="clay-card" style="padding: 24px; overflow-x: auto;">
-        <div class='tableauPlaceholder' id='viz1781374573370' style='position: relative; width: 1360px; margin: 0 auto; box-shadow: var(--shadow-outer); border-radius: var(--radius-sm); overflow: hidden;'>
-          <noscript>
-            <a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;SalesProfitAnalytichDashboard&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
-          </noscript>
-          <object class='tableauViz'  style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-            <param name='embed_code_version' value='3' /> 
-            <param name='site_root' value='' />
-            <param name='name' value='SalesProfitAnalytichDashboard&#47;Dashboard1' />
-            <param name='tabs' value='no' />
-            <param name='toolbar' value='yes' />
-            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;SalesProfitAnalytichDashboard&#47;Dashboard1&#47;1.png' /> 
-            <param name='animate_transition' value='yes' />
-            <param name='display_static_image' value='yes' />
-            <param name='display_spinner' value='yes' />
-            <param name='display_overlay' value='yes' />
-            <param name='display_count' value='yes' />
-            <param name='language' value='en-US' />
-            <param name='device' value='desktop' />
-          </object>
-        </div>
-        <script type='text/javascript'>
+          <div class='tableauPlaceholder' id='viz1781374573370'
+            style='position: relative; width: 1360px; margin: 0 auto; box-shadow: var(--shadow-outer); border-radius: var(--radius-sm); overflow: hidden;'>
+            <noscript>
+              <a href='#'><img alt='Dashboard 1 '
+                  src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;SalesProfitAnalytichDashboard&#47;Dashboard1&#47;1_rss.png'
+                  style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='site_root' value='' />
+              <param name='name' value='SalesProfitAnalytichDashboard&#47;Dashboard1' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image'
+                value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;SalesProfitAnalytichDashboard&#47;Dashboard1&#47;1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-US' />
+              <param name='device' value='desktop' />
+            </object>
+          </div>
+          <script type='text/javascript'>
             var divElement = document.getElementById('viz1781374573370');
             var vizElement = divElement.getElementsByTagName('object')[0];
-            vizElement.style.width='1360px';
-            vizElement.style.height='1027px';
+            vizElement.style.width = '1360px';
+            vizElement.style.height = '1027px';
             var scriptElement = document.createElement('script');
             scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
-        </script>
-      </div>
+          </script>
+        </div>
       </section>
 
     </main>
@@ -382,7 +381,8 @@
       box-shadow: var(--shadow-outer);
     " role="contentinfo">
       <span><i class="fa-solid fa-chart-pie"></i> DASHBOARD SALES</span>
-      <span><i class="fa-regular fa-copyright"></i> <span id="footer-year"></span> Ragil Hidayatulloh. All rights reserved.</span>
+      <span><i class="fa-regular fa-copyright"></i> <span id="footer-year"></span> Ilham Bintang Herlambang. All rights
+        reserved.</span>
       <span><i class="fa-solid fa-brain"></i> Dibuat dengan Harta, Tahta, Logika</span>
     </footer>
 
@@ -390,7 +390,6 @@
 
   <!-- SCRIPT LOGIKA APLIKASI -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="config.js"></script>
   <script src="supabaseLoader.js"></script>
   <script src="aiInsight.js"></script>
   <script src="anomalyDetector.js"></script>
@@ -459,4 +458,5 @@
   </script>
 
 </body>
+
 </html>
